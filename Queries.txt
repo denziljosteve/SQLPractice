@@ -1,0 +1,246 @@
+Query all columns for all American cities in the CITY table with populations larger than 100000. The CountryCode for America is USA.
+
+select * 
+from city
+where
+    population > 100000 and 
+    countrycode = "USA";
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+Query all attributes of every Japanese city in the CITY table. The COUNTRYCODE for Japan is JPN.
+
+select *
+from city
+where
+	countrycode = "JPN";
+---------------------------------------------------------------------------------------------------------------------------------
+
+Query a list of CITY names from STATION for cities that have an even ID number. Print the results in any order, but exclude duplicates from the answer.
+
+select distinct city 
+from station 
+where 
+    (id%2) = 0l
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+Find the difference between the total number of CITY entries in the table and the number of distinct CITY entries in the table.
+
+select count(city) - count(distinct city) as difference
+from station;
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+
+select city as city_name, length(city) as length_of_name
+from station
+group by length(city), city
+order by length(city)
+limit 1;
+
+
+select city as city_name, length(city) as length_of_name
+from station
+group by length(city), city
+order by length(city) desc
+limit 1;
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
+
+select distinct city
+from station
+where
+	substring(city,1,1) in ('a', 'e', 'i', 'o', 'u');
+
+select distinct city
+from station 
+where
+	city regexp '^[aeiou]';
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
+
+select distinct city
+from station
+where
+	substring(city,-1,1) in ('a', 'e', 'i', 'o', 'u');
+
+select distinct city
+from station 
+where
+	city regexp '[aeiou]$';
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+
+select distinct city
+from station
+where
+	substring(city,1,1) in ('a', 'e', 'i', 'o', 'u') and
+	substring(city,-1,1) in ('a', 'e', 'i', 'o', 'u');
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+
+select distinct city
+from station
+where
+	substring(city,1,1) not in ('a', 'e', 'i', 'o', 'u');
+
+select distinct city
+from station 
+where
+	city not regexp '^[aeiou]';
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table:
+
+Equilateral: It's a triangle with  sides of equal length.
+Isosceles: It's a triangle with  sides of equal length.
+Scalene: It's a triangle with  sides of differing lengths.
+Not A Triangle: The given values of A, B, and C don't form a triangle.
+
+
+select
+    A,
+    B,
+    C	  
+    case
+        when A + B <= C or A + C <= B or B + C <= A then 'Not A Triangle'
+        when A = B and B = C then 'Equilateral'
+        when A = B or B = C or A = C then 'Isosceles'
+        else 'Scalene'
+    end as Triangle_Type
+from triangles;
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Generate the following two result sets:
+
+Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S).
+Query the number of ocurrences of each occupation in OCCUPATIONS. Sort the occurrences in ascending order, and output them in the following format:
+
+There are a total of [occupation_count] [occupation]s.
+where [occupation_count] is the number of occurrences of an occupation in OCCUPATIONS and [occupation] is the lowercase occupation name. If more than one Occupation has the same [occupation_count], they should be ordered alphabetically.
+
+Note: There will be at least two entries in the table for each type of occupation.
+
+
+
+select 
+    concat(Name, '(', substr(Occupation, 1, 1), ')') as Name_Profession
+from occupations
+order by Name;
+    
+select 
+    concat( 'There are a total of ', count(*),' ', lower(occupation), 's.' )
+from occupations
+group by occupation
+order by count(occupation), occupation;
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
