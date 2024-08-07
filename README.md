@@ -1,0 +1,1 @@
+Here are my SQL queries for my own personal Data Analysis Project on COVID (Cases and Vaccination) Data
